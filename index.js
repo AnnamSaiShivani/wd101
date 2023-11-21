@@ -53,7 +53,7 @@ const formSubmit = (event) => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const dateOfBirth = document.getElementById("dob").value; 
-    const a = document.getElementById("term").checked;
+    const terms = document.getElementById("term").checked;
 
     const entry = {
         name, email, password, dob: dateOfBirth,terms
