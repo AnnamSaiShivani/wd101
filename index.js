@@ -1,18 +1,18 @@
 function startDate() {
-    const todays = new Date();
-    return new Date(todays.getFullYear() - 55, todays.getMonth(), todays.getDate()).toISOString().split('T')[0];
+    const today = new Date();
+    return new Date(today.getFullYear() - 55, today.getMonth(), today.getDate()).toISOString().split('T')[0];
 }
 
 function endDate() {
-    const todays = new Date();
-    return new Date(todays.getFullYear() - 18, todays.getMonth(), todays.getDate()).toISOString().split('T')[0];
+    const today = new Date();
+    return new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()).toISOString().split('T')[0];
 }
 
 const dobInput = document.getElementById('dob');
 dobInput.setAttribute('min', startDate());
 dobInput.setAttribute('max', endDate());
 
-let Form = document.getElementById("Form");
+let userForm = document.getElementById("userForm");
 
 const getEntries = () => {
     let entries = localStorage.getItem("userEntries");
@@ -29,17 +29,17 @@ let userEntries = getEntries();
 const dispEntries = () => {
     const entries = getEntries();
     const tableEntries = entries.map((entry) => {
-        const name = <td class="bor">${entry.name}</td>;
-        const email = <td class="bor">${entry.email}</td>;
-        const password = <td class="bor">${entry.password}</td>;
-        const dateOfBirth = <td class="bor">${entry.dob}</td>; 
-        const terms = <td class="bor">${entry.terms}</td>;
+        const name = `<td class="bor">${entry.name}</td>`;
+        const email = `<td class="bor">${entry.email}</td>`;
+        const password = `<td class="bor">${entry.password}</td>`;
+        const dateOfBirth = `<td class="bor">${entry.dob}</td>`; 
+        const atn = `<td class="bor">${entry.atn}</td>`;
 
-        const row = <tr>${name} ${email} ${password} ${dateOfBirth} ${terms}</tr>;
+        const row = `<tr>${name} ${email} ${password} ${dateOfBirth} ${atn}</tr>`;
         return row;
     }).join("\n");
 
-    const table = <h1>Entries</h1><table class="table"><tr class="bor"><th class="bor">Name</th><th class="bor">Email</th><th class="bor">Password</th><th class="bor">Dob</th><th class="bor">Accepted terms?</th></tr>${tableEntries}</table>;
+    const table = `<h1>Entries</h1><table class="table"><tr class="bor"><th class="bor">Name</th><th class="bor">Email</th><th class="bor">Password</th><th class="bor">Dob</th><th class="bor">Accepted terms?</th></tr>${tableEntries}</table>`;
 
     let details = document.getElementById("tableView");
     details.innerHTML = table;
@@ -53,10 +53,10 @@ const formSubmit = (event) => {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const dateOfBirth = document.getElementById("dob").value; 
-    const terms = document.getElementById("term").checked;
+    const atn = document.getElementById("atn").checked;
 
     const entry = {
-        name, email, password, dob: dateOfBirth,terms
+        name, email, password, dob: dateOfBirth, atn
     }
 
     userEntries.push(entry);
@@ -64,4 +64,4 @@ const formSubmit = (event) => {
     dispEntries();
 }
 
-userForm.addEventListener("submit", formSubmit);
+userForm.addEventListener("submit", formSubmit);
